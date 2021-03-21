@@ -71,4 +71,4 @@ async def bulkclear(ctx, num):
 async def ping(ctx):
     await ctx.send("Bot je ziv!")
 
-bot.run('ODIyMDM2Mzc4MjUwNTEwMzQ2.YFMbCQ._GNSU5XJlzZuOvPlEHpatow-f2A')
+bot.run('token')
