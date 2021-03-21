@@ -1,4 +1,4 @@
-import json, time, wikipedia, discord, asyncio, requests
+import json, datetime, wikipedia, discord, asyncio, requests, random
 from jokeapi import Jokes
 from covid import Covid
 from discord.abc import Messageable
@@ -22,12 +22,18 @@ async def on_command_error(ctx, error):
 @bot.command()
 async def wiki(ctx, input):
     await ctx.send(wikipedia.summary(input, auto_suggest=False,redirect=True,sentences=3))
+
+@bot.command()
+async def randbroj(ctx, broj1: int, broj2: int):
+    await ctx.send(random.randint(broj1, broj2))
+
 """
 @bot.command()
 @commands.has_permissions(ban_members = True)
 async def softban(ctx, input: discord.Member,*, reason = None):
     await input.ban(reason=reason)
 """
+
 """
 @bot.command()
 async def korona(ctx):
@@ -49,7 +55,6 @@ async def sala(ctx):
         await ctx.send(joke["setup"])
         await ctx.send(joke["delivery"])
 """
-#napravi zvonka
 
 @bot.command()
 @commands.has_permissions(manage_messages = True)
@@ -71,4 +76,4 @@ async def bulkclear(ctx, num):
 async def ping(ctx):
     await ctx.send("Bot je ziv!")
 
-bot.run('ODIyMDM2Mzc4MjUwNTEwMzQ2.YFMbCQ._GNSU5XJlzZuOvPlEHpatow-f2A')
+bot.run('')
