@@ -71,6 +71,7 @@ async def bulkclear(ctx, num):
 async def ping(ctx):
     await ctx.send("Bot je ziv!")
 
+<<<<<<< HEAD
 @bot.command()
 @commands.has_permissions(kick_members = True)
 async def whois(ctx, member: discord.Member):
@@ -94,4 +95,4 @@ async def casevi():
     #nesto
 """
 
-bot.run('ODIyMDM2Mzc4MjUwNTEwMzQ2.YFMbCQ.X4fsldLGga9sBNd0QTRtwBjmLM4')
+bot.run('token')
