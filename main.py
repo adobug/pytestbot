@@ -3,7 +3,8 @@ from jokeapi import Jokes
 from covid import Covid
 from discord.abc import Messageable
 from discord.ext.commands import Bot
-from discord.ext import commands
+from discord.ext import commands, tasks
+from itertools import cycle
 
 bot = Bot(command_prefix='!')
 
@@ -13,6 +14,7 @@ async def on_ready():
     print(bot.user.name)
     print(bot.user.id)
     print('-----------------')
+    await bot.change_presence(status = discord.Status.idle, activity = discord.Game('with Python'))
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -26,13 +28,6 @@ async def wiki(ctx, input):
 @bot.command()
 async def randbroj(ctx, broj1: int, broj2: int):
     await ctx.send(random.randint(broj1, broj2))
-
-"""
-@bot.command()
-@commands.has_permissions(ban_members = True)
-async def softban(ctx, input: discord.Member,*, reason = None):
-    await input.ban(reason=reason)
-"""
 
 """
 @bot.command()
@@ -76,4 +71,27 @@ async def bulkclear(ctx, num):
 async def ping(ctx):
     await ctx.send("Bot je ziv!")
 
-bot.run('')
+@bot.command()
+@commands.has_permissions(kick_members = True)
+async def whois(ctx, member: discord.Member):
+    embed = discord.Embed(title = member.display_name, description = member.mention, color = discord.Color.green())
+    embed.add_field(name = "ID", value = member.id, inline = True)
+    embed.set_thumbnail(url = member.avatar_url)
+    embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested by {ctx.author.name}") 
+    await ctx.send(embed=embed)
+
+@bot.command()
+async def poll(ctx, text: str):
+    emojis = ['👍', '👎']
+    embed = discord.Embed(title = "Poll", description = text, color = discord.Color.red())
+    message = await ctx.send(embed = embed)
+    for i in emojis:
+        await message.add_reaction(emoji=i)
+
+"""
+@tasks.loop(minutes = 1)
+async def casevi():
+    #nesto
+"""
+
+bot.run('ODIyMDM2Mzc4MjUwNTEwMzQ2.YFMbCQ.X4fsldLGga9sBNd0QTRtwBjmLM4')
